@@ -4,6 +4,7 @@ import './App.css';
   import { Navbar } from './components/nav/nav';
   import { HomePage } from './components/homepage/homepage';
   import { CardList } from './components/card-list/card-list';
+  import { SearchBox } from './components/search-box/search-box';
 
 
 class App extends Component {
@@ -11,8 +12,9 @@ class App extends Component {
     super();
 
     this.state = {
-      search: 'Hello',
+      searchField: '',
       twitterArray: []
+
     }
   }
 
@@ -23,14 +25,15 @@ class App extends Component {
   }
 
   render() {
+    const {twitterArray, searchField} = this.state;
+    const filteredArray = twitterArray.filter(user => 
+      user.name.toLowerCase().includes(searchField.toLowerCase()))
+
       return (
         <div className="App">
           <Navbar />
-          <CardList>
-            {this.state.twitterArray.map(tweet => (
-              <h1 key={tweet.id}> {tweet.name}</h1>
-            ))}
-          </CardList>
+          <SearchBox placeholder='Search' handleChange ={e => this.setState({searchField:e.target.value})}/>
+          <CardList twitterArray={filteredArray} />            
         </div>
       );
     }
