@@ -1,0 +1,8 @@
+.nav-container {
+  display: grid;
+  width: 100vw;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+  border: 1px solid black;
+}
+

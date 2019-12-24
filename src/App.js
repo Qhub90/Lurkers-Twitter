@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  import { Navbar } from './components/nav/nav';
+  import { HomePage } from './components/homepage/homepage';
+  import { CardList } from './components/card-list/card-list';
+
+
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      search: 'Hello',
+      twitterArray: []
+    }
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(tweets => this.setState({twitterArray: tweets}))
+  }
+
+  render() {
+      return (
+        <div className="App">
+          <Navbar />
+          <CardList>
+            {this.state.twitterArray.map(tweet => (
+              <h1 key={tweet.id}> {tweet.name}</h1>
+            ))}
+          </CardList>
+        </div>
+      );
+    }
+  }
 
 export default App;
