@@ -1,23 +1,27 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import './nav.css'
 
-export const Navbar = () => {
+const Navbar = () => {
   return(
     <nav className='nav-container'>
     
       <div className="logo">
-        <h2>Logo</h2>
+        <Link to='/'>Logo</Link>
       </div>
       
       <div className='search'>
-        <h2>Search</h2>
+        <Link to='search'>Search</Link>
       </div>
 
       <div className='random'>        
-      <h2>Random</h2>
+      <Link to='/random'>Random</Link>
       </div>
 
     </nav>
   )
 };
+
+export default Navbar;
