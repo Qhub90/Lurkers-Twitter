@@ -6,12 +6,18 @@ import './card-list.css';
 
 
 
- const CardList = (props) => {
+ const CardList = ({twitterData}) => {
+
+  let test = twitterData.map(tweet => { 
+    return <Card key={tweet.id}
+                 image={tweet.profile_image_url_https} 
+                 name={tweet.name}
+                 text={tweet.text}
+                 screenName={tweet.screen_name}/>
+  })
   return(
     <div className='card-list'>
-      {props.twitterArray.map(tweet => (
-        <Card key={tweet.id} tweet={tweet} />
-      ))}
+     {test}
     </div>
   )
 }

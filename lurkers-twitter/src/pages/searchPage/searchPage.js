@@ -10,36 +10,30 @@ class SearchPage extends Component {
 
   this.state = {
     searchField: '',
-    twitterArray: [],
-    data: null
+    twitterData: []
    }
   }
 
-  componentDidMount() {
+  onHandleChange = (e) => {
+    this.setState({searchField:e.target.value})
+    console.log(e.target.value)
+  }
 
-    this.callBackendAPI()
-    // fetch('https://jsonplaceholder.typicode.com/users')
-    // .then(response => response.json())
-    // .then(tweets => this.setState({twitterArray: tweets}))
-    .then(res => this.setState({ data: res.express }))
+  onSubmitChange = () => {
+    fetch('/search')
+    .then(response => response.json())
+    .then(tweets => this.setState({twitterData: tweets}))
       .catch(err => console.log(err));
   }
-  callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
 
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
-  };
   
   render(){
   return(
     <div>
     <h1>Search Page</h1>
-    <SearchBox />
-    <p className="App-intro">{this.state.data}</p>
+    <SearchBox handleChange={this.onHandleChange} submitChange={this.onSubmitChange}/>
+    
+    { this.state.twitterData.length ? <CardList twitterData={this.state.twitterData}/> :<h3>No results</h3> }
 
     </div>
   )
@@ -48,4 +42,3 @@ class SearchPage extends Component {
 
 export default SearchPage
 
-//  <CardList twitterArray={this.state.twitterArray}/>.
