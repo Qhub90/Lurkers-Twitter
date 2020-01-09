@@ -1,33 +1,45 @@
 const express = require('express');
 const axios = require('axios');
+require("dotenv").config();
 
-// require('dotenv').config();
+const app = express();
 
-// // // twitter stuff ////
-// // const qs = require('querystring');
-// // const request = require('request');
+const port = process.env.PORT || 5000;
 
-// const util = require('util');
-// const get = util.promisify(request.get);
-// // const post = util.promisify(request.post);
+const consumer_key = process.env.API_KEY;
+const consumer_secret = process.env.SECRET_API_KEY;
 
-// const consumer_key = process.env.API_KEY;
-// const consumer_secret = process.env.SECRET_API_KEY;
+let token = '';
 
 // const endpointURL = new URL('https://api.twitter.com/1.1/search/tweets.json');
 
 
-const app = express();
-const port = process.env.PORT || 5000;
+const config = {
+  url: "https://api.twitter.com/oauth2/token",
+  method: 'post',
+  auth: {
+    username: consumer_key,
+    password: consumer_secret
+  },
+  headers: { 
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+  data: "grant_type=client_credentials"
+};
 
-// console.log that your server is up and running
-app.listen(port, () => console.log(`Listening on port ${port}`));
+axios.request(config).then(function(res) {
+    token = res.data.access_token;
+    console.log(token);
 
+})
+.catch(function (error) {
+  console.log(error)
+});
 
 app.get('/search', (req, res) => {
   // res.send(Elon_Musk)
 
-  axios.get('https://jsonplaceholder.typicode.com/users')
+  axios.get('https://api.twitter.com/1.1/search/tweets.json?q=elon&result_type=popular&count=2',{headers: {Authorization: 'Bearer ' + token}})
   .then(function (response) {
     // handle success
     res.send(response.data);
@@ -39,28 +51,8 @@ app.get('/search', (req, res) => {
 })
 
 
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// const params = {
-//   q: 'Elon',
-// };
-
-
-
-// async function getRequest({oauth_token, oauth_token_secret}) {
-//   const oAuthConfig = {
-//     consumer_key: consumer_key,
-//     consumer_secret: consumer_secret,
-//     token: oauth_token,
-//     token_secret: oauth_token_secret,
-//   };
-
-//   const req = await get({url: endpointURL, oauth: oAuthConfig, qs: params, json: true});
-//   if (req.body) {
-//     return req.body;
-//   } else {
-//     throw new Error('Cannot get an OAuth request token');
-//   }
-// }
 
 const Elon_Musk = 
 [
@@ -236,3 +228,5 @@ const Elon_Musk =
       "translator_type": "none"
   }
 ]
+
+
