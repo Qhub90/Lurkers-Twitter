@@ -1,19 +1,66 @@
 const express = require('express');
+const axios = require('axios');
+
+// require('dotenv').config();
+
+// // // twitter stuff ////
+// // const qs = require('querystring');
+// // const request = require('request');
+
+// const util = require('util');
+// const get = util.promisify(request.get);
+// // const post = util.promisify(request.post);
+
+// const consumer_key = process.env.API_KEY;
+// const consumer_secret = process.env.SECRET_API_KEY;
+
+// const endpointURL = new URL('https://api.twitter.com/1.1/search/tweets.json');
+
+
 const app = express();
 const port = process.env.PORT || 5000;
 
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// create a GET route
-app.get('/express_backend', (req, res) => {
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
-});
 
 app.get('/search', (req, res) => {
-  res.send(Elon_Musk)
+  // res.send(Elon_Musk)
+
+  axios.get('https://jsonplaceholder.typicode.com/users')
+  .then(function (response) {
+    // handle success
+    res.send(response.data);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
 })
 
+
+
+// const params = {
+//   q: 'Elon',
+// };
+
+
+
+// async function getRequest({oauth_token, oauth_token_secret}) {
+//   const oAuthConfig = {
+//     consumer_key: consumer_key,
+//     consumer_secret: consumer_secret,
+//     token: oauth_token,
+//     token_secret: oauth_token_secret,
+//   };
+
+//   const req = await get({url: endpointURL, oauth: oAuthConfig, qs: params, json: true});
+//   if (req.body) {
+//     return req.body;
+//   } else {
+//     throw new Error('Cannot get an OAuth request token');
+//   }
+// }
 
 const Elon_Musk = 
 [

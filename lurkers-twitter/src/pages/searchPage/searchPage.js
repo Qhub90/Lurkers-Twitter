@@ -22,7 +22,7 @@ class SearchPage extends Component {
   onSubmitChange = () => {
     fetch('/search')
     .then(response => response.json())
-    .then(tweets => this.setState({twitterData: tweets}))
+    .then(tweets => console.log(tweets))
       .catch(err => console.log(err));
   }
 
