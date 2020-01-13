@@ -1,44 +1,64 @@
-import React, { Component } from 'react';
-import SearchBox from '../../components/search-box/search-box';
-import CardList from '../../components/card-list/card-list';
+import React, { Component } from "react";
+import SearchBox from "../../components/search-box/search-box";
+import CardList from "../../components/card-list/card-list";
 
-
+import axios from "axios";
 
 class SearchPage extends Component {
   constructor() {
-  super();
+    super();
 
-  this.state = {
-    searchField: '',
-    twitterData: []
-   }
+    this.state = {
+      user: "",
+      tweet: "",
+      twitterData: []
+    };
   }
 
-  onHandleChange = (e) => {
-    this.setState({searchField:e.target.value})
-    console.log(e.target.value)
-  }
+  onHandleChange = event => {
+    let nam = event.target.name;
+    let val = event.target.value;
+    this.setState({ [nam]: val });
+  };
 
-  onSubmitChange = () => {
-    fetch('/search')
-    .then(response => response.json())
-    .then(tweets => console.log(tweets))
-      .catch(err => console.log(err));
-  }
+  onSubmitChange = event => {
+    event.preventDefault();
 
-  
-  render(){
-  return(
-    <div>
-    <h1>Search Page</h1>
-    <SearchBox handleChange={this.onHandleChange} submitChange={this.onSubmitChange}/>
-    
-    { this.state.twitterData.length ? <CardList twitterData={this.state.twitterData}/> :<h3>No results</h3> }
+    const { user, tweet } = this.state;
 
-    </div>
-  )
+    if (tweet.length > 2) {
+      axios
+        .post("/search/tweets", { tweet })
+        .then(response => this.setState({twitterData:response.data.statuses}))
+        .catch(err => console.log(err));
+    } else if (user.length > 2) {
+      axios
+        .post("/search/users", { user })
+        .then(response => console.log(response))
+        .then(users => console.log(users))
+        .catch(err => console.log(err));
+    } else {
+      console.log("Please enter something");
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Search Page</h1>
+        <SearchBox
+          handleChange={this.onHandleChange}
+          handleSubmit={this.onSubmitChange}
+        />
+
+        {this.state.twitterData.length ? (
+          <CardList twitterData={this.state.twitterData} />
+        ) : (
+          <h3>No results</h3>
+        )}
+      </div>
+    );
   }
 }
 
-export default SearchPage
-
+export default SearchPage;
