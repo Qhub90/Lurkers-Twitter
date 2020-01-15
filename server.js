@@ -10,6 +10,8 @@ const port = process.env.PORT || 5000;
 
 const consumer_key = process.env.API_KEY;
 const consumer_secret = process.env.SECRET_API_KEY;
+const access_token = process.env.ACCESS_TOKEN;
+
 
 let token = "";
 
@@ -25,6 +27,14 @@ const config = {
   },
   data: "grant_type=client_credentials"
 };
+
+const userConfig = {
+  url: "https://api.twitter.com/1.1/statuses/update.json",
+  method: "post",
+  headers: {
+
+  }
+}
 
 axios
   .request(config)
@@ -56,24 +66,23 @@ app.post("/search/tweets", (req, res) => {
 });
 
 app.post("/search/users", (req, res) => {
-  // res.send(Elon_Musk)
 
   let keyword = req.body.user.toLowerCase();
 
-  axios
+    axios
     .get(
-      `https://api.twitter.com/1.1/users/search.json?q=${keyword}&result_type=popular&count=6`,
+      `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${keyword}&count=2`,
       { headers: { Authorization: "Bearer " + token } }
     )
     .then(function(response) {
       // handle success
-      console.log(response.data)
-      // res.send(response.data);
+      res.send(response.data);
     })
     .catch(function(error) {
       // handle error
       console.log(error);
     });
+  
 });
 
 // app.get("/users", (req, res) => {
@@ -115,3 +124,4 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
   //     // handle error
   //     console.log(error);
   //   });
+

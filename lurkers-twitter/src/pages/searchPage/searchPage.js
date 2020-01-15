@@ -13,34 +13,40 @@ class SearchPage extends Component {
       tweet: "",
       twitterData: []
     };
-  }
+  };
+
 
   onHandleChange = event => {
     let nam = event.target.name;
     let val = event.target.value;
     this.setState({ [nam]: val });
+
   };
+
 
   onSubmitChange = event => {
     event.preventDefault();
 
-    const { user, tweet } = this.state;
+    let { user, tweet } = this.state;
 
     if (tweet.length > 2) {
       axios
         .post("/search/tweets", { tweet })
         .then(response => this.setState({twitterData:response.data.statuses}))
         .catch(err => console.log(err));
-    } else if (user.length > 2) {
+
+    };
+    
+    if (user.length > 2) {
       axios
         .post("/search/users", { user })
-        .then(response => console.log(response))
-        .then(users => console.log(users))
+        .then(response => this.setState({twitterData:response.data.text}))
         .catch(err => console.log(err));
     } else {
-      console.log("Please enter something");
+      console.log("User doesnt exist or nothing was entered");
     }
   };
+
 
   render() {
     return (
