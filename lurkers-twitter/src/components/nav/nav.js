@@ -9,15 +9,15 @@ const Navbar = () => {
     <nav className='nav-container'>
     
       <div className="logo">
-        <Link to='/'>Logo</Link>
+        <Link className='button' to='/'>Home</Link>
       </div>
       
       <div className='search'>
-        <Link to='search'>Search</Link>
+        <Link className='button' to='search'>Search</Link>
       </div>
 
       <div className='random'>        
-      <Link to='/random'>Random</Link>
+      <Link className='button' to='/random'>Comedians</Link>
       </div>
 
     </nav>

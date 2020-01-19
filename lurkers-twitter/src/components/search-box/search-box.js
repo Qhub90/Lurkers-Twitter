@@ -4,17 +4,11 @@ import "./search-box.css";
 
 const SearchBox = ({ handleChange, handleSubmit }) => {
   return (
-    <div>
+    <div className='search-form'>
       <form onSubmit={handleSubmit}>
-        <label>
-          User:
-          <input type="text" name="user" onChange={handleChange} />
-        </label>
-        <label>
-          Tweet:
-          <input type="text" name="tweet" onChange={handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
+        <input className='input-form' placeholder='Username' type='text' name='user' onChange={handleChange} />
+        <input className='input-form' placeholder='Tweets' type='text' name='tweet' onChange={handleChange} />
+        <input id='button-submit' type='submit' value='Submit' />
       </form>
     </div>
   );

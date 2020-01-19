@@ -71,7 +71,26 @@ app.post("/search/users", (req, res) => {
 
     axios
     .get(
-      `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${keyword}&count=2`,
+      `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${keyword}&count=6`,
+      { headers: { Authorization: "Bearer " + token } }
+    )
+    .then(function(response) {
+      // handle success
+      res.send(response.data);
+    })
+    .catch(function(error) {
+      // handle error
+      console.log(error);
+    });
+  
+});
+app.post("/search/random", (req, res) => {
+
+  let keyword = req.body.username.toLowerCase();
+
+    axios
+    .get(
+      `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${keyword}&count=6`,
       { headers: { Authorization: "Bearer " + token } }
     )
     .then(function(response) {

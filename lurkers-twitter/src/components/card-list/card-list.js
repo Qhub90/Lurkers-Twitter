@@ -10,10 +10,10 @@ import './card-list.css';
 
   let test = twitterData.map(tweet => { 
     return <Card key={tweet.id}
-                 image={tweet.profile_image_url_https} 
+                 image={tweet.user.profile_image_url} 
                  name={tweet.name}
                  text={tweet.text}
-                 screenName={tweet.screen_name}/>
+                 screenName={tweet.user.screen_name}/>
   })
   return(
     <div className='card-list'>

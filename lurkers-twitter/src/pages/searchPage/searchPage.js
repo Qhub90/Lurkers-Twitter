@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import SearchBox from "../../components/search-box/search-box";
 import CardList from "../../components/card-list/card-list";
 
+import './searchPage.css';
+
 import axios from "axios";
 
 class SearchPage extends Component {
@@ -40,7 +42,7 @@ class SearchPage extends Component {
     if (user.length > 2) {
       axios
         .post("/search/users", { user })
-        .then(response => this.setState({twitterData:response.data.text}))
+        .then(response => this.setState({twitterData:response.data}))
         .catch(err => console.log(err));
     } else {
       console.log("User doesnt exist or nothing was entered");
@@ -50,8 +52,8 @@ class SearchPage extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Search Page</h1>
+      <div className='search-page'>
+        <h1 className='title'>Search Page</h1>
         <SearchBox
           handleChange={this.onHandleChange}
           handleSubmit={this.onSubmitChange}

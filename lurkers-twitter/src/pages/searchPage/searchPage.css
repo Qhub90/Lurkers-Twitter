@@ -1,0 +1,25 @@
+.search-page{
+  color: white;
+  height: 80vh;
+  width: 90%;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.title{
+  border-bottom: white solid 2px;
+  width: 50%;
+  margin: auto;
+
+}
+
+.input-form{
+  margin-right: 40px;
+  margin-bottom: 40px;
+  width: 300px;
+}
+
+#button-submit{
+  display: block;
+  margin: auto;
+}

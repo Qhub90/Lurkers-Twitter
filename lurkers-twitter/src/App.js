@@ -21,8 +21,7 @@ const App = () => {
         <Route exact path='/' component={HomePage} />
         <Route  path='/search' component={SearchPage} />
         <Route  path='/random' component={RandomPage} />
-      </Switch>
-                  
+      </Switch>                  
     </div>
   );
 }
