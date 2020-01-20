@@ -11,9 +11,11 @@ import './card-list.css';
   let test = twitterData.map(tweet => { 
     return <Card key={tweet.id}
                  image={tweet.user.profile_image_url} 
-                 name={tweet.name}
+                 name={tweet.user.name}
                  text={tweet.text}
-                 screenName={tweet.user.screen_name}/>
+                 screenName={tweet.user.screen_name}
+                 date={tweet.created_at}
+                 />
   })
   return(
     <div className='card-list'>

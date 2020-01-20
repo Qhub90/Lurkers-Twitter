@@ -1,11 +1,12 @@
 .card-container {
   display: flex;
-  flex-direction: row;
-  background-color: cadetblue;
+  flex-direction: column;
+  background-color: white;
   border: 1px solid gray;
   border-radius: 5px;
   padding: 25px;
   cursor: pointer;
+  color: black;
   
   backface-visibility: hidden;
   transform: translateZ(0);
@@ -14,4 +15,29 @@
 
 .card-container:hover {
   transform: scale(1.05);
+}
+
+.card-top{
+  display: flex;
+}
+
+
+.card-container > img{
+  height: 100px;
+  width: 250px;
+  border-radius: 50%;
+
+}
+
+.card-span{
+  margin-right: 10px;
+}
+
+.card-p{
+  margin-top: 10px;
+  font-size: small;
+}
+
+.card-footer{
+  display: flex;
 }

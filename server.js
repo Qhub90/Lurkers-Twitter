@@ -48,7 +48,7 @@ axios
 app.post("/search/tweets", (req, res) => {
   // res.send(Elon_Musk)
 
-  let keyword  = req.body.tweet.toLowerCase();
+  let keyword  = req.body.tweet;
 
   axios
     .get(

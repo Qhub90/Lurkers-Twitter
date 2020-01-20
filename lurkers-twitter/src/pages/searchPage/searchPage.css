@@ -6,20 +6,53 @@
   margin-top: 5%;
 }
 
-.title{
-  border-bottom: white solid 2px;
+/* .title{
+  border-bottom: gray solid 1px;
   width: 50%;
   margin: auto;
 
+} */
+.search-form{
+  color: white;
+  margin-top: 8%;
+}
+
+input{
+height: 25px;
+width: 200px;
 }
 
 .input-form{
   margin-right: 40px;
+  margin-left: 40px;
   margin-bottom: 40px;
   width: 300px;
 }
 
-#button-submit{
+
+#button-submit {
   display: block;
   margin: auto;
+  background-color: white;
+  width: 100px;
+  color: black;
+  text-transform: uppercase; 
+  box-shadow: 0 2px 0 gray;
+  /* 
+  color: black;
+  padding: 1em 1.5em;
+  position: relative;
+  text-decoration: none;
+  */
+ 
+}
+
+#button-submit:hover {
+  background-color: black;
+  color: white;
+}
+
+#button-submit:active {
+  box-shadow: none;
+  top: 5px;
 }

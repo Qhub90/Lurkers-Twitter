@@ -44,7 +44,7 @@ class RandomPage extends Component {
               <img
                 slt="hello"
                 src={tom}
-                onClick={() => this.grabUser("YMHBlueBan")}
+                onClick={() => this.grabUser("tomsegura")}
               />
             </div>
             <div className="podcast">
