@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "lurker-install": "npm install --prefix lurkers-twitter",
-    "start": "node index.js", 
-    "server": "nodemon index.js", 
+    "start": "node server.js", 
+    "server": "nodemon server.js", 
     "client": "npm start --prefix lurkers-twitter",
     "dev": "concurrently \"npm run server\" \"npm run lurkers-twitter\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix lurkers-twitter && npm run build --prefix lurkers-twitter",
