@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchBox from "../../components/search-box/search-box";
+import SearchForm from "../../components/search-form/search-form";
 import CardList from "../../components/card-list/card-list";
 
 import "./searchPage.css";
@@ -13,18 +13,19 @@ class SearchPage extends Component {
     this.state = {
       user: "",
       tweet: "",
+      message:'',
       twitterData: []
     };
   }
 
-  componentDidMount() {
-    axios
-        .post("/search/tweets")
-        .then(response =>
-          this.setState({ twitterData: response.data.statuses })
-        )
-        .catch(err => console.log(err));
-  }
+  // componentDidMount() {
+  //   axios
+  //       .post("/search/users")
+  //       .then(response =>
+  //         this.setState({ twitterData: response.data.statuses })
+  //       )
+  //       .catch(err => console.log(err));
+  // }
 
   onHandleChange = event => {
     let nam = event.target.name;
@@ -32,29 +33,29 @@ class SearchPage extends Component {
     this.setState({ [nam]: val });
   };
 
-  // onSubmitChange = event => {
-  //   event.preventDefault();
+  onSubmitChange = event => {
+    event.preventDefault();
 
-  //   let { user, tweet } = this.state;
+    event.target.reset();
 
-  //   if (tweet.length > 2) {
-  //     axios
-  //       .post("/search/tweets", { tweet })
-  //       .then(response =>
-  //         this.setState({ twitterData: response.data.statuses })
-  //       )
-  //       .catch(err => console.log(err));
-  //   }
+    let { user, tweet } = this.state;
 
-  //   if (user.length > 2) {
-  //     axios
-  //       .post("/search/users", { user })
-  //       .then(response => this.setState({ twitterData: response.data }))
-  //       .catch(err => console.log(err));
-  //   } else {
-  //     console.log("User doesnt exist or nothing was entered");
-  //   }
-  // };
+    if (tweet.length > 2) {
+      axios
+        .post("/search/tweets", { tweet })
+        .then(response => this.setState({ twitterData: response.data.statuses }))
+        .catch(err => console.log(err));
+    }
+
+    if (user.length > 2) {
+      axios
+        .post("/search/users", { user })
+        .then(response => this.setState({ twitterData: response.data }))
+        .catch(err => console.log(err));
+    } else {
+      this.setState({message: 'Please enter a valid user/tweet'})
+    }
+  };
 
   render() {
     return (
@@ -64,7 +65,7 @@ class SearchPage extends Component {
           <h1 className="title">Search Page</h1>
           <h4>Search for a specific user or a phrase </h4>
         </div>
-        <SearchBox
+        <SearchForm
           handleChange={this.onHandleChange}
           handleSubmit={this.onSubmitChange}
         />
@@ -72,7 +73,7 @@ class SearchPage extends Component {
         {this.state.twitterData.length ? (
           <CardList twitterData={this.state.twitterData} />
         ) : (
-          <h3>No results</h3>
+          <h3 id='error-message'>{this.state.message}</h3>
         )}
       </div>
     );

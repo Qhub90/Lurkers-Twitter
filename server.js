@@ -84,7 +84,7 @@ app.post("/search/users", (req, res) => {
     });
   
 });
-app.post("/search/random", (req, res) => {
+app.post("/search/comedy", (req, res) => {
 
   let keyword = req.body.username.toLowerCase();
 

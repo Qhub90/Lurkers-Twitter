@@ -1,10 +1,10 @@
 import React from "react";
 
-import "./search-box.css";
+import "./search-form.css";
 
-const SearchBox = ({ handleChange, handleSubmit }) => {
+const SearchForm = ({ handleChange, handleSubmit }) => {
   return (
-    <div className='search-form'>
+    <div id='one' className='search-form'>
       <form onSubmit={handleSubmit}>
         <input className='input-form' placeholder='Username' type='text' name='user' onChange={handleChange} />
         <input className='input-form' placeholder='Tweets' type='text' name='tweet' onChange={handleChange} />
@@ -14,4 +14,4 @@ const SearchBox = ({ handleChange, handleSubmit }) => {
   );
 };
 
-export default SearchBox;
+export default SearchForm;

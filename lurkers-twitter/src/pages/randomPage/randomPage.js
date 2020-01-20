@@ -23,7 +23,7 @@ class RandomPage extends Component {
 
   grabUser = username => {
     axios
-      .post("/search/random", { username })
+      .post("/search/comedy", { username })
       .then(response => this.setState({twitterData:response.data}))
       .catch(err => console.log(err));
   };
