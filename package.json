@@ -4,13 +4,19 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "lurker-install": "npm install --prefix lurkers-twitter",
+    "start": "node index.js", 
+    "server": "nodemon index.js", 
+    "client": "npm start --prefix lurkers-twitter",
+    "dev": "concurrently \"npm run server\" \"npm run lurkers-twitter\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix lurkers-twitter && npm run build --prefix lurkers-twitter",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.1",
+    "concurrently": "^5.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1"
   }
